@@ -9,6 +9,34 @@ curl https://raw.githubusercontent.com/regashia/backends/master/bin/install.sh |
 backends コマンドが `/usr/local/bin` に追加される。
 
 # 使い方
+```
+$ backends help
+Usage:
+  backends [command]
+
+Environments:
+  MYSQL_VERSION
+    default: latest
+  MYSQL_PORT
+    default: 3306
+  REDIS_VERSION
+    default: latest
+  REDIS_PORT
+    default: 3306
+
+Commands:
+  start
+    立ち上げる
+  stop
+    コンテナをとめる
+  remove_container
+    コンテナを削除する
+  remove_all
+    コンテナ、データを含め、全てを削除する
+  help
+    ヘルプを表示する
+```
+
 mysql 最新バージョンを 3306 ポート、 redis 最新バージョンを 6379 ポートで立ち上げる。
 
 ```bash
