@@ -32,4 +32,4 @@ xxx           redis:2.8  ...  0.0.0.0:9999->6379/tcp  redis
 ```
 
 # カスタマイズ
-`${HOME}/.config/backends` を編集する。
+`${HOME}/.config/backends/docker-compose.yml` を編集する。
