@@ -1,0 +1,57 @@
+#!/bin/bash -eu
+
+DOCKER_COMPOSE_FILE=${HOME}/.config/backends/docker-compose.yml
+
+export MYSQL_VERSION=${MYSQL_VERSION:-latest}
+export MYSQL_PORT=${MYSQL_PORT:-3306}
+export REDIS_VERSION=${REDIS_VERSION:-latest}
+export REDIS_PORT=${REDIS_PORT:-6379}
+
+function usage {
+  cat <<EOF
+Usage:
+  $(basename ${0}) [command]
+
+Environments:
+  MYSQL_VERSION
+    default: latest
+  MYSQL_PORT
+    default: 3306
+  REDIS_VERSION
+    default: latest
+  REDIS_PORT
+    default: 3306
+
+Commands:
+  start
+    立ち上げる
+  stop
+    コンテナをとめる
+  remove_container
+    コンテナを削除する
+  remove_all
+    コンテナ、データを含め、全てを削除する
+  help
+    ヘルプを表示する
+EOF
+}
+
+case ${1:-help} in
+  start)
+    docker-compose -f ${DOCKER_COMPOSE_FILE} up -d
+		;;
+  stop)
+    docker-compose -f ${DOCKER_COMPOSE_FILE} stop
+    ;;
+  remove)
+    docker-compose -f ${DOCKER_COMPOSE_FILE} stop
+    docker-compose -f ${DOCKER_COMPOSE_FILE} rm --force
+    ;;
+  remove_all)
+    docker-compose -f ${DOCKER_COMPOSE_FILE} down --volumes
+    ;;
+	*)
+		usage
+		exit 1
+		;;
+esac
